@@ -1,5 +1,7 @@
 import express from 'express'
 const app = express()
+// Indicando para o Express ler o body com JSON
+app.use(express.json())
 
 // Mock (estrutura base de dados para teste)
 const selecoes = [
@@ -16,6 +18,11 @@ app.get('/', (req, res) => {
 
 app.get('/selecoes', (req, res) => {
     res.status(200).send(selecoes)
+})
+
+app.post('/selecoes', (req, res) => {
+    selecoes.push(req.body)
+    res.status(201).send('Seleção cadastrada com sucesso')
 })
 
 export default app
